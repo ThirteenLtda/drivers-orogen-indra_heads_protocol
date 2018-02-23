@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "orogen",
+            "request": "launch",
+            "name": "orogen - indra_heads_protocol::Task",
+            "deploy": "indra_heads_protocol::Task",
+            "deployAs": "indra_heads_protocol"
+        },
+        {
+            "type": "Ruby",
+            "request": "launch",
+            "name": "test suite",
+            "program": "${workspaceRoot}/test/test_task.rb",
+            "args": []
+        },
+
+
+    ]
+}

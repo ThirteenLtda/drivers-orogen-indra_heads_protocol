@@ -1,0 +1,27 @@
+name "indra_heads_protocol"
+version "0.1"
+
+using_library "indra_heads_protocol"
+import_types_from "indra_heads_protocol/Response.hpp"
+import_types_from "indra_heads_protocol/RequestedConfiguration.hpp"
+
+import_types_from "std"
+import_types_from "base"
+
+using_task_library "iodrivers_base"
+
+# The "client" task
+#
+# This task listens to commands and sends a data structure that is listened
+# to by Syskit, to perform the commands
+#
+# This is the "main" task, that is the one that runs nominally
+task_context "Task", subclasses: "iodrivers_base::Task" do
+    # This is the default from now on, and should not be removed. Rock will
+    # transition to a setup where all components use a configuration step.
+    needs_configuration
+
+    input_port 'response', 'indra_heads_protocol/Response'
+    output_port 'requested_configuration', 'indra_heads_protocol/RequestedConfiguration'
+end
+
