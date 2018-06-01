@@ -60,9 +60,20 @@ void Task::updateHook()
 }
 void Task::processIO()
 {
-    mDriver->readRequest();
-    auto conf = mDriver->getRequestedConfiguration();
-    _requested_configuration.write(conf);
+    try {
+        auto msg_id = mDriver->readRequest();
+        if (msg_id == ID_ENABLE_STABILIZATION)
+        {
+            mDriver->writeResponse(
+                Response{ ID_ENABLE_STABILIZATION, STATUS_OK });
+            return;
+        }
+        auto conf = mDriver->getRequestedConfiguration();
+        _requested_configuration.write(conf);
+    }
+    catch(iodrivers_base::TimeoutError) {
+        std::cerr << "Timed out while trying to decode a request" << std::endl;
+    }
 }
 void Task::errorHook()
 {
