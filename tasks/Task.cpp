@@ -62,12 +62,6 @@ void Task::processIO()
 {
     try {
         auto msg_id = mDriver->readRequest();
-        if (msg_id == ID_ENABLE_STABILIZATION)
-        {
-            mDriver->writeResponse(
-                Response{ ID_ENABLE_STABILIZATION, STATUS_OK });
-            return;
-        }
         auto conf = mDriver->getRequestedConfiguration();
         _requested_configuration.write(conf);
     }
